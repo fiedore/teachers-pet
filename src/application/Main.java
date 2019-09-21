@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Table;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.crypto.Data;
 
 public class Main extends Application {
@@ -31,10 +32,6 @@ public class Main extends Application {
         loadRows(mainGrid);
         primaryStage.setScene(new Scene(mainGrid, 1200, 700));
         primaryStage.show();
-        DataAdapter dataAdapter = new DataAdapter();
-        Table table = dataAdapter.generateTestData();
-        XMLHandler xmlHandler = new XMLHandler();
-        xmlHandler.marshallData(table);
     }
 
     private void loadRows(GridPane mainGrid) {
@@ -50,7 +47,13 @@ public class Main extends Application {
         mainGrid.add(generateTestNode(), 1, 2);
         mainGrid.add(generateTestNode(), 2, 2);
         Button saveButton = getSaveButton();
-        saveButton.setOnAction(event -> controller.saveToXML(mainGrid));
+        saveButton.setOnAction(event -> {
+            try {
+                controller.saveToXML(mainGrid);
+            } catch (JAXBException e) {
+                e.printStackTrace();
+            }
+        });
         mainGrid.add(saveButton, 2, 3);
         GridPane.setHalignment(saveButton, HPos.RIGHT);
 
@@ -58,7 +61,6 @@ public class Main extends Application {
 
     private Button getSaveButton() {
         Button button = new Button("Save");
-
         return button;
     }
 
