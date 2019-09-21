@@ -7,8 +7,15 @@ import java.util.List;
 
 @XmlRootElement
 public class Table {
-
-    @XmlElement
-    @XmlElementWrapper
     private List<Question> questions;
+
+    @XmlElement(name = "question")
+    @XmlElementWrapper
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 }

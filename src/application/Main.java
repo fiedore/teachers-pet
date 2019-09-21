@@ -7,12 +7,17 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.Table;
+
+import javax.xml.crypto.Data;
 
 public class Main extends Application {
+    Controller controller = new Controller();
 
     public static void main(String[] args) {
         launch(args);
@@ -26,12 +31,17 @@ public class Main extends Application {
         loadRows(mainGrid);
         primaryStage.setScene(new Scene(mainGrid, 1200, 700));
         primaryStage.show();
+        DataAdapter dataAdapter = new DataAdapter();
+        Table table = dataAdapter.generateTestData();
+        XMLHandler xmlHandler = new XMLHandler();
+        xmlHandler.marshallData(table);
     }
 
     private void loadRows(GridPane mainGrid) {
-
-        mainGrid.add(generateTestNode(), 0, 0);
-        mainGrid.add(generateTestNode(), 1, 0);
+        Label question1 = new Label("Question 1");
+        TextArea question1Text = new TextArea();
+        mainGrid.add(question1, 0, 0);
+        mainGrid.add(question1Text, 1, 0);
         mainGrid.add(generateTestNode(), 2, 0);
         mainGrid.add(generateTestNode(), 0, 1);
         mainGrid.add(generateTestNode(), 1, 1);
@@ -40,6 +50,7 @@ public class Main extends Application {
         mainGrid.add(generateTestNode(), 1, 2);
         mainGrid.add(generateTestNode(), 2, 2);
         Button saveButton = getSaveButton();
+        saveButton.setOnAction(event -> controller.saveToXML(mainGrid));
         mainGrid.add(saveButton, 2, 3);
         GridPane.setHalignment(saveButton, HPos.RIGHT);
 
@@ -47,6 +58,7 @@ public class Main extends Application {
 
     private Button getSaveButton() {
         Button button = new Button("Save");
+
         return button;
     }
 
@@ -70,4 +82,6 @@ public class Main extends Application {
         gridPane.setGridLinesVisible(true);
         return gridPane;
     }
+
+
 }
