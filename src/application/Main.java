@@ -12,10 +12,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Table;
 
 import javax.xml.bind.JAXBException;
-import javax.xml.crypto.Data;
+import java.util.List;
 
 public class Main extends Application {
     Controller controller = new Controller();
@@ -29,23 +28,18 @@ public class Main extends Application {
         primaryStage.setTitle("Teacher's pet");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("icon.jpg")));
         GridPane mainGrid = setUpMainGrid();
-        loadRows(mainGrid);
+        loadRows(mainGrid, 4);
         primaryStage.setScene(new Scene(mainGrid, 1200, 700));
         primaryStage.show();
     }
 
-    private void loadRows(GridPane mainGrid) {
-        Label question1 = new Label("Question 1");
-        TextArea question1Text = new TextArea();
-        mainGrid.add(question1, 0, 0);
-        mainGrid.add(question1Text, 1, 0);
-        mainGrid.add(generateTestNode(), 2, 0);
-        mainGrid.add(generateTestNode(), 0, 1);
-        mainGrid.add(generateTestNode(), 1, 1);
-        mainGrid.add(generateTestNode(), 2, 1);
-        mainGrid.add(generateTestNode(), 0, 2);
-        mainGrid.add(generateTestNode(), 1, 2);
-        mainGrid.add(generateTestNode(), 2, 2);
+    private void loadRows(GridPane mainGrid, int amountOfRows) {
+        List<VBox> vBoxes = NodeGenerator.getListOfLabelsInVBoxes("Question", amountOfRows);
+        List<TextArea> textAreas = NodeGenerator.getListOfTextAreas(amountOfRows);
+        for (int i = 0; i < amountOfRows; i++) {
+            mainGrid.add(vBoxes.get(i), 0, i);
+            mainGrid.add(textAreas.get(i), 1, i);
+        }
         Button saveButton = getSaveButton();
         saveButton.setOnAction(event -> {
             try {
@@ -54,7 +48,7 @@ public class Main extends Application {
                 e.printStackTrace();
             }
         });
-        mainGrid.add(saveButton, 2, 3);
+        mainGrid.add(saveButton, 2, amountOfRows + 1);
         GridPane.setHalignment(saveButton, HPos.RIGHT);
 
     }
@@ -79,9 +73,9 @@ public class Main extends Application {
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setPrefWidth(1200);
         gridPane.setPrefHeight(700);
-        gridPane.setHgap(30);
-        gridPane.setVgap(30);
-        gridPane.setGridLinesVisible(true);
+        gridPane.setHgap(5);
+        gridPane.setVgap(5);
+        gridPane.setGridLinesVisible(false);
         return gridPane;
     }
 

@@ -7,6 +7,7 @@ import model.Table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DataAdapter {
 
@@ -20,15 +21,15 @@ public class DataAdapter {
         return table;
     }
 
-    public Table processData(List nodes) {
+    public Table processData(Map<TextArea, Integer> textAreaToNumber) {
         Table table = new Table();
         List<Question> questions = table.getQuestions();
-        for (Object object : nodes) {
-            String textFromNode = ((TextArea) object).getText();
+        textAreaToNumber.forEach((textArea, number) -> {
             Question question = new Question();
-            question.setText(textFromNode);
+            question.setText(textArea.getText());
+            question.setNumber(number + 1);
             questions.add(question);
-        }
+        });
         return table;
     }
 }
