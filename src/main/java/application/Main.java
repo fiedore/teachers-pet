@@ -26,7 +26,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Teacher's pet");
-        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("icon.jpg")));
+        primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/icon.jpg")));
         GridPane mainGrid = setUpMainGrid();
         loadRows(mainGrid, 4);
         primaryStage.setScene(new Scene(mainGrid, 1000, 600));
