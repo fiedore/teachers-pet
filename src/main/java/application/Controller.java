@@ -7,7 +7,8 @@ import javafx.scene.layout.GridPane;
 import model.Table;
 
 import javax.xml.bind.JAXBException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Controller {
