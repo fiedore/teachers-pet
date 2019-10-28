@@ -12,11 +12,15 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBException;
 import java.util.List;
 
 public class Main extends Application {
+    private static final Logger logger = LogManager.getLogger();
     private Controller controller = new Controller();
 
     public static void main(String[] args) {
@@ -34,6 +38,7 @@ public class Main extends Application {
     }
 
     private void loadRows(GridPane mainGrid, int amountOfRows) {
+        logger.log(Level.INFO, "Loading rows...");
         List<VBox> vBoxes = NodeGenerator.getListOfLabelsInVBoxes("Question", amountOfRows);
         List<TextArea> textAreas = NodeGenerator.getListOfTextAreas(amountOfRows);
         for (int i = 0; i < amountOfRows; i++) {
@@ -45,12 +50,12 @@ public class Main extends Application {
             try {
                 controller.saveToXML(mainGrid);
             } catch (JAXBException e) {
-                e.printStackTrace();
+                logger.log(Level.ERROR, e.getMessage());
             }
         });
         mainGrid.add(saveButton, 2, amountOfRows + 1);
         GridPane.setHalignment(saveButton, HPos.RIGHT);
-
+        logger.log(Level.INFO, "Rows loaded!");
     }
 
     private Button getSaveButton() {
