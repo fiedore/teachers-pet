@@ -1,6 +1,7 @@
 package application;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -9,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -17,6 +19,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.xml.bind.JAXBException;
+import java.net.URL;
 import java.util.List;
 
 public class Main extends Application {
@@ -31,6 +34,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Teacher's pet");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/icon.jpg")));
+        URL fxmlUrl = null;
+        AnchorPane root = FXMLLoader.<AnchorPane>load(fxmlUrl);
         GridPane mainGrid = setUpMainGrid();
         loadRows(mainGrid, 4);
         primaryStage.setScene(new Scene(mainGrid, 1000, 600));
