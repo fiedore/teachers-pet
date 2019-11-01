@@ -31,3 +31,5 @@ A
 Teacher's pet.iml,9\5\958562406a1cc5f37a6b46874070531b5c06bc4b
 M
 src/main/resources/log4j2.xml,3\6\36b9f0d33e4b7e602e3cd701314fae81543db66f
+W
+'src/main/java/application/MainView.fxml,0\b\0b083e5453016c11060d9af73d1bca5d0e6d9c3a

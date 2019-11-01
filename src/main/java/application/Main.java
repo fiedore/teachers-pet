@@ -12,6 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.Level;
@@ -34,11 +35,11 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Teacher's pet");
         primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("/icon.jpg")));
-        URL fxmlUrl = null;
-        AnchorPane root = FXMLLoader.<AnchorPane>load(fxmlUrl);
+        URL fxmlUrl = Main.class.getResource(("/MainView.fxml"));
+        Pane root = FXMLLoader.load(fxmlUrl);
         GridPane mainGrid = setUpMainGrid();
         loadRows(mainGrid, 4);
-        primaryStage.setScene(new Scene(mainGrid, 1000, 600));
+        primaryStage.setScene(new Scene(root, 1000, 600));
         primaryStage.show();
     }
 

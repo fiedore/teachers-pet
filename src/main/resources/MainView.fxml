@@ -6,19 +6,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainView">
+<Pane xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="1000.0"
+      xmlns="http://javafx.com/javafx/10.0.2-internal" fx:controller="application.Controller">
     <children>
-        <TitledPane animated="false" collapsible="false" expanded="false" prefHeight="400.0" prefWidth="600.0" style="-fx-font-size: Tre;" text="Teacher's pet">
+        <TitledPane animated="false" collapsible="false" expanded="false" prefHeight="600.0" prefWidth="1000.0"
+                    fitToHeight="true" fitToWidth="true" text="Teacher's pet">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1.0" prefWidth="1000.0"/>
             </content>
             <font>
                 <Font name="Trebuchet MS Bold" size="20.0" />
             </font>
         </TitledPane>
-      <ScrollPane hbarPolicy="NEVER" layoutY="40.0" prefHeight="360.0">
+        <ScrollPane hbarPolicy="NEVER" layoutY="40.0">
          <content>
-              <GridPane prefHeight="361.0" prefWidth="600.0">
+             <GridPane>
                   <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="185.0" />
                       <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="425.0" minWidth="10.0" prefWidth="415.0" />
@@ -69,4 +71,4 @@
     <stylesheets>
         <URL value="@/stylesheet.css" />
     </stylesheets>
-</AnchorPane>
+</Pane>
